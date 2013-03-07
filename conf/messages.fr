@@ -5,10 +5,10 @@ validation.required = %s est obligatoire.
 login = Login
 password = Mot de passe
 mail = Adresse mail
-typeUtilisateur = Type d'utilisateur
+typeUtilisateur = Type d'user
 
 # Titre du menu de gauche, le menu1
-fr.menu1.titre.livres = Livres
+fr.menu1.titre.books = Livres
 fr.menu1.titre.auteurs = Auteurs
 fr.menu1.titre.emprunts = Emprunts
 

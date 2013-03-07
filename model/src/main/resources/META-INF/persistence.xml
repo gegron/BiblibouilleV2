@@ -1,0 +1,57 @@
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ Copyright (c) 2010, Red Hat Inc. or third-party contributors as
+  ~ indicated by the @author tags or express copyright attribution
+  ~ statements applied by the authors.  All third-party contributions are
+  ~ distributed under license by Red Hat Inc.
+  ~
+  ~ This copyrighted material is made available to anyone wishing to use, modify,
+  ~ copy, or redistribute it subject to the terms and conditions of the GNU
+  ~ Lesser General Public License, as published by the Free Software Foundation.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  ~ or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
+  ~ for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public License
+  ~ along with this distribution; if not, write to:
+  ~ Free Software Foundation, Inc.
+  ~ 51 Franklin Street, Fifth Floor
+  ~ Boston, MA  02110-1301  USA
+  -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="fr.biblibouille.model.jpa" >
+        <description>
+            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
+        </description>
+
+        <class>fr.biblibouille.model.Author</class>
+        <class>fr.biblibouille.model.Book</class>
+        <class>fr.biblibouille.model.User</class>
+
+
+        <!--<resource name="jdbc/biblibouille" auth="Container" type="javax.sql.DataSource">-->
+            <!--<param name="username" value="legunda" />-->
+            <!--<param name="password" value="db_3!?GmJ6" />-->
+            <!--<param name="url" value="jdbc:cloudbees://biblibouille" />-->
+        <!--</resource>-->
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/biblibouille" />
+            <property name="javax.persistence.jdbc.user" value="legunda" />
+            <property name="javax.persistence.jdbc.password" value="db_3!?GmJ6" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

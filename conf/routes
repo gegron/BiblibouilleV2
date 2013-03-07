@@ -21,19 +21,19 @@ GET     /auteur/modifier/{id}                   AuteurAction.modifier
 
 GET     /auteur/{id}                            AuteurAction.afficher
 
-# Les actions concernant les livres
+# Les actions concernant les books
 
-GET     /livre/afficher/{id}                    LivreAction.afficher
+GET     /book/afficher/{id}                    LivreAction.afficher
 
-GET     /livre/ajouter                          LivreAction.ajouter
+GET     /book/ajouter                          LivreAction.ajouter
 
-GET     /livre/modifier/{id}                    LivreAction.modifier
+GET     /book/modifier/{id}                    LivreAction.modifier
 
-GET     /livre/enregistrer                      LivreAction.enregistrer
+GET     /book/enregistrer                      LivreAction.enregistrer
 
-GET     /livre/rechercher                       LivreAction.rechercher
+GET     /book/rechercher                       LivreAction.rechercher
 
-GET     /livre/pagination                       LivreAction.pagination
+GET     /book/pagination                       LivreAction.pagination
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
