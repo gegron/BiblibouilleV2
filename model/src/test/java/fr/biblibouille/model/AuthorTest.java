@@ -9,18 +9,15 @@ public class AuthorTest {
     @Test
     public void should_create_auteur() {
         // Given
-        String nom = "nom";
-        String prenom = "prenom";
-        String dateNaissance = "dateNaissance";
-        String dateMort = "dateMort";
-        String image = "image";
+        String lastname = "nom";
+        String firstname = "prenom";
 
         // When
-        Author author = new Author(nom, prenom);
+        Author author = Author.create(firstname, lastname);
 
         // Then
-        assertThat(author.getNom()).isEqualTo(nom);
-        assertThat(author.getPrenom()).isEqualTo(prenom);
+        assertThat(author.getLastname()).isEqualTo(lastname);
+        assertThat(author.getFirstname()).isEqualTo(firstname);
     }
 
 }

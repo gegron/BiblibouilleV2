@@ -1,8 +1,0 @@
-# Application dependencies
-
-require:
-    - play -> crud
-    - play -> secure
-    - play -> cloudbees 0.2.2
-    - commons-lang -> commons-lang 2.6
-    - junit -> junit 4.8.1

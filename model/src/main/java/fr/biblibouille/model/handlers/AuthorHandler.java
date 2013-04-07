@@ -1,41 +1,35 @@
 package fr.biblibouille.model.handlers;
 
 import fr.biblibouille.model.Author;
-import fr.biblibouille.model.utils.EntityManagerUtils;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static fr.biblibouille.model.utils.EntityManagerUtils.getEntityManager;
 
 public class AuthorHandler {
 
     private Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
     public Author save(Author author) {
-        EntityManager entityManager = EntityManagerUtils.getEntityManager();
+        EntityManager entityManager = getEntityManager();
 
         entityManager.getTransaction().begin();
-
-        LOGGER.info(String.format("Author.save: (%s %s)", author.getPrenom(), author.getNom()));
         entityManager.persist(author);
-
         entityManager.getTransaction().commit();
-        //entityManager.close();
+
+        LOGGER.info(String.format("Author.save: (%s %s)", author.getFirstname(), author.getLastname()));
 
         return author;
     }
 
     public List<Author> findAll() {
-        EntityManager entityManager = EntityManagerUtils.getEntityManager();
-
-        entityManager.getTransaction().begin();
-
-        List<Author> result = entityManager.createQuery("from Author").getResultList();
-
-        entityManager.getTransaction().commit();
-
-        return result;
+        return getEntityManager().createQuery("from Author").getResultList();
     }
 
+    public Author findOne(Long id) {
+        return getEntityManager().find(Author.class, id);
+    }
 
 }

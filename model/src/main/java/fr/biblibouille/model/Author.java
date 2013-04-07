@@ -18,9 +18,9 @@ public class Author implements Serializable {
     @Transient
     private Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
-    private String id;
-    private String nom;
-    private String prenom;
+    private Long id;
+    private String lastname;
+    private String firstname;
     private String libelle;
 
     // private List<LivreReference> livreReference;
@@ -44,37 +44,37 @@ public class Author implements Serializable {
     public Author() {
     }
 
-    public Author(String nom, String prenom) {
-        this.nom = nom;
-        this.prenom = prenom;
+    public Author(String lastname, String firstname) {
+        this.lastname = lastname;
+        this.firstname = firstname;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
         miseAJourLibelle();
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
         miseAJourLibelle();
     }
 
-    public String getNom() {
-        return nom;
+    public String getLastname() {
+        return lastname;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getFirstname() {
+        return firstname;
     }
 
     @OneToMany(fetch = FetchType.LAZY,
@@ -94,13 +94,45 @@ public class Author implements Serializable {
     private void miseAJourLibelle() {
         StringBuffer libelle = new StringBuffer();
 
-        libelle.append(this.prenom != null ? this.prenom : "");
-        if (this.nom != null && this.prenom != null) {
+        libelle.append(this.firstname != null ? this.firstname : "");
+        if (this.lastname != null && this.firstname != null) {
             libelle.append(" ");
         }
-        libelle.append(" " + this.nom != null ? this.nom : "");
+        libelle.append(" " + this.lastname != null ? this.lastname : "");
 
         this.libelle = libelle.toString();
+    }
+
+    public static Author create(String firstname, String lastname) {
+        return new AuthorBuilder().withFirstname(firstname).withLastname(lastname).build();
+    }
+
+    /**
+     * Static constructor for Author
+     */
+    private static class AuthorBuilder {
+
+        private static Author author;
+
+        private AuthorBuilder() {
+            author = new Author();
+        }
+
+        private Author build() {
+            return author;
+        }
+
+        private AuthorBuilder withFirstname(String firstname) {
+            author.firstname = firstname;
+
+            return this;
+        }
+
+        private AuthorBuilder withLastname(String lastname) {
+            author.lastname = lastname;
+
+            return this;
+        }
     }
 
 }

@@ -1,7 +1,5 @@
 package fr.biblibouille.model;
 
-import fr.biblibouille.model.utils.EntityManagerUtils;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.logging.Logger;
@@ -18,9 +16,9 @@ public class Book implements Serializable {
 
     private String collection;
 
-    private String etage;
+    private String shelf;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Author author;
 
 //    @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -30,10 +28,10 @@ public class Book implements Serializable {
 
     }
 
-    public Book(String titre, String collection, String etage, Author author) {
+    public Book(String titre, String collection, String shelf, Author author) {
         this.titre = titre;
         this.collection = collection;
-        this.etage = etage;
+        this.shelf = shelf;
         this.author = author;
 //        this.author = author;
 //        this.proprietaire = proprietaire;
@@ -74,12 +72,12 @@ public class Book implements Serializable {
         this.collection = collection;
     }
 
-    public String getEtage() {
-        return etage;
+    public String getShelf() {
+        return shelf;
     }
 
-    public void setEtage(String etage) {
-        this.etage = etage;
+    public void setShelf(String shelf) {
+        this.shelf = shelf;
     }
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -91,12 +89,61 @@ public class Book implements Serializable {
         this.author = author;
     }
 
+    public static Book create(String title, String collection, String etage, Author author) {
+        return new BookBuilder()
+                .withTitle(title)
+                .withCollection(collection)
+                .withEtage(etage)
+                .withAuthor(author)
+                .build();
+    }
+
+    // TODO: check if not better solution/implementation
+    private static class BookBuilder {
+
+        private Book book;
+
+        private BookBuilder() {
+            this.book = new Book();
+        }
+
+        // TODO: voir comment detruire book une fois qu'il est retourné
+        private Book build() {
+            return book;
+        }
+
+        private BookBuilder withTitle(String title) {
+            book.titre = title;
+
+            return this;
+        }
+
+        private BookBuilder withCollection(String collection) {
+            book.collection = collection;
+
+            return this;
+        }
+
+        private BookBuilder withEtage(String etage) {
+            book.shelf = etage;
+
+            return this;
+        }
+
+        private BookBuilder withAuthor(Author author) {
+            book.author = author;
+
+            return this;
+        }
+
+    }
+
 //    /**
-//     * Permet de savoir s'il n'y a aucun champs d'initialisé dans l'objet
+    //     * Permet de savoir s'il n'y a aucun champs d'initialisé dans l'objet
 //     */
 //    public Boolean estVide() {
 //        boolean estVide = Strings.isNullOrEmpty(this.titre) && Strings.isNullOrEmpty(this.collection)
-//                && Strings.isNullOrEmpty(this.etage) && this.author == null;
+//                && Strings.isNullOrEmpty(this.shelf) && this.author == null;
 //
 //        return Boolean.valueOf(estVide);
 //    }
