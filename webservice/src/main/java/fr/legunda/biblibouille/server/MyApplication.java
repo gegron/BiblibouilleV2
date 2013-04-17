@@ -19,8 +19,8 @@ public class MyApplication extends Application {
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(new Book("titre 1", "collection", "etage 1", new Author("authorName", "authorFirstName")));
-        em.persist(new Book("titre 2", "collection", "etage 1", new Author("authorName", "authorFirstName")));
+        em.persist(new Book("titre 1", "collection", "1", new Author("PROUST", "Marcel")));
+        em.persist(new Book("titre 2", "collection", "12", new Author("ROUSSEAU", "Jean-Jacques")));
         em.getTransaction().commit();
     }
 
