@@ -2,6 +2,7 @@ package fr.legunda.biblibouille.server.resources;
 
 import fr.biblibouille.model.Author;
 import fr.biblibouille.model.Book;
+import fr.biblibouille.model.handlers.AuthorHandler;
 import fr.biblibouille.model.handlers.BookHandler;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -14,6 +15,8 @@ import java.io.IOException;
 public class BookResource {
 
     private final static BookHandler bookHandler = new BookHandler();
+
+    private final static AuthorHandler authorHandler = new AuthorHandler();
 
     /**
      * List all book
@@ -49,11 +52,12 @@ public class BookResource {
     @POST
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response post(@FormParam("title") String title, @FormParam("collection") String collection, @FormParam("etage") String etage) throws IOException {
-        Author author = null;
+    public Response post(@FormParam("title") String title, @FormParam("collection") String collection, @FormParam("shelf") String shelf, @FormParam("authorId") long authorId) throws IOException {
+        Author author = authorHandler.findOne(authorId);
+
         ObjectMapper mapper = new ObjectMapper();
 
-        Book result = bookHandler.save(Book.create(title, collection, etage, author));
+        Book result = bookHandler.save(Book.create(title, collection, shelf, author));
 
         return Response.ok(mapper.writeValueAsString(result)).build();
     }

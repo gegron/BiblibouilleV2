@@ -25,7 +25,7 @@ public class AuthorHandler {
     }
 
     public List<Author> findAll() {
-        return getEntityManager().createQuery("from Author").getResultList();
+        return getEntityManager().createQuery("from Author a order by a.lastname").getResultList();
     }
 
     public Author findOne(Long id) {
