@@ -18,7 +18,7 @@ public class Book implements Serializable {
 
     private String shelf;
 
-    //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Author author;
 
 //    @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -93,7 +93,7 @@ public class Book implements Serializable {
         return new BookBuilder()
                 .withTitle(title)
                 .withCollection(collection)
-                .withEtage(etage)
+                .withShelf(etage)
                 .withAuthor(author)
                 .build();
     }
@@ -124,8 +124,8 @@ public class Book implements Serializable {
             return this;
         }
 
-        private BookBuilder withEtage(String etage) {
-            book.shelf = etage;
+        private BookBuilder withShelf(String shelf) {
+            book.shelf = shelf;
 
             return this;
         }

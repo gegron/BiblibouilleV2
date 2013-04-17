@@ -39,13 +39,14 @@ public class Author implements Serializable {
 //            joinColumns = {@JoinColumn(name = "AUTEUR_ID")},
 //            inverseJoinColumns = {@JoinColumn(name = "LIVRE_ID")})
 
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Book> books = new HashSet<Book>();
 
     public Author() {
     }
 
     public Author(String lastname, String firstname) {
-        this.lastname = lastname;
+        this.lastname = lastname.toUpperCase();
         this.firstname = firstname;
     }
 
@@ -60,7 +61,7 @@ public class Author implements Serializable {
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastname = lastname.toUpperCase();
         miseAJourLibelle();
     }
 
