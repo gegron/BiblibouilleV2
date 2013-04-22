@@ -1,6 +1,5 @@
 package fr.biblibouille.model;
 
-import fr.biblibouille.model.enums.TypeUtilisateur;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -16,7 +15,7 @@ public class UserTest {
         String password = "password";
 
         // When
-        User user = new User(login, password, email, typeUtilisateur);
+        User user = new User(login, password, email);
 
         // Then
         assertThat(user.getLogin()).isEqualTo(login);

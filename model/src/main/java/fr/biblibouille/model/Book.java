@@ -18,11 +18,11 @@ public class Book implements Serializable {
 
     private String shelf;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private User owner;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Author author;
-
-//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-//    private User proprietaire;
 
     public Book() {
 
@@ -78,6 +78,14 @@ public class Book implements Serializable {
 
     public void setShelf(String shelf) {
         this.shelf = shelf;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
