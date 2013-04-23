@@ -14,7 +14,11 @@ public class EntityManagerUtils {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
+    /*
+     * JEudes: Un entityManager par transaction car non thread safe.
+     */
     public static EntityManager getEntityManager() {
+        // return new EntityManagerFactory.createEntityManager
         return entityManager;
     }
 
