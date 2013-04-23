@@ -51,8 +51,8 @@ public class Main {
         EntityManager em = getEntityManager();
 
         em.getTransaction().begin();
-        em.persist(new Book("titre 1", "collection", "etage 1", new Author("authorName", "authorFirstName")));
-        em.persist(new Book("titre 2", "collection", "etage 1", new Author("authorName", "authorFirstName")));
+//        em.persist(new Book("titre 1", "collection", "etage 1", new Author("authorName", "authorFirstName")));
+//        em.persist(new Book("titre 2", "collection", "etage 1", new Author("authorName", "authorFirstName")));
         em.getTransaction().commit();
     }
 
