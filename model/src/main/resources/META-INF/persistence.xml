@@ -43,18 +43,23 @@
         <!--</resource>-->
 
         <properties>
-            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
-            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/biblibouille" />-->
-            <!--<property name="javax.persistence.jdbc.user" value="legunda" />-->
-            <!--<property name="javax.persistence.jdbc.password" value="db_3!?GmJ6" />-->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblibouilleDB" />
+            <property name="javax.persistence.jdbc.user" value="bibliowner" />
+            <property name="javax.persistence.jdbc.password" value="biblibouille2013" />
 
-            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE" />
-            <property name="javax.persistence.jdbc.user" value="sa" />
-            <property name="javax.persistence.jdbc.password" value="" />
+            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilleDB" />-->
+            <!--<property name="javax.persistence.jdbc.user" value="bibliowner" />-->
+            <!--<property name="javax.persistence.jdbc.password" value="biblibouille2013" />-->
+
+            <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE" />-->
+            <!--<property name="javax.persistence.jdbc.user" value="sa" />-->
+            <!--<property name="javax.persistence.jdbc.password" value="" />-->
 
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
         </properties>
 
     </persistence-unit>
