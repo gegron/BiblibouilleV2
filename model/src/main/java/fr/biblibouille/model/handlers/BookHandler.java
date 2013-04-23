@@ -15,9 +15,14 @@ public class BookHandler {
     public Book save(Book book) {
         EntityManager entityManager = getEntityManager();
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(book);
-        entityManager.getTransaction().commit();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(book);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.info(String.format("Save error"));
+            entityManager.getTransaction().rollback();
+        }
 
         LOGGER.info(String.format("Book.save (%s)", book.getTitre()));
 
