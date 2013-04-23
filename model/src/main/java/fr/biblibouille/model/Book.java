@@ -18,21 +18,20 @@ public class Book implements Serializable {
 
     private String shelf;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User owner;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Author author;
 
     public Book() {
 
     }
 
-    public Book(String titre, String collection, String shelf, Author author) {
+    public Book(String titre, String collection, String shelf, Author author, User owner) {
         this.titre = titre;
         this.collection = collection;
         this.shelf = shelf;
         this.author = author;
+        this.owner = owner;
 //        this.author = author;
 //        this.proprietaire = proprietaire;
     }
@@ -80,6 +79,8 @@ public class Book implements Serializable {
         this.shelf = shelf;
     }
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinColumn(name = "OWNER_ID", nullable = false)
     public User getOwner() {
         return owner;
     }
