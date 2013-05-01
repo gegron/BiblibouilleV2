@@ -7,13 +7,13 @@ $(document).ready(
         });
 
         // Initialisation du bouton d'ajout des livres
-        $('#bookAdd').click(function () {
-            var $title = $('#title').val(),
-                $collection = $('#collection').val(),
-                $shelf = $('#shelf').val(),
-                $authorId = $('#comboboxAuthor').val();
+        $('#bookAdd').on('click', function () {
+            var title = $('#title').val(),
+                collection = $('#collection').val(),
+                shelf = $('#shelf').val(),
+                authorId = $('#comboboxAuthor').val();
 
-            $.post('/resource/book/add', {title: $title, collection: $collection, shelf: $shelf, authorId: $authorId}, function (data) {
+            $.post('/resource/book/add', {title: title, collection: collection, shelf: shelf, authorId: authorId}, function (data) {
                 console.log(data);
 //                    var user = JSON.stringify(data);
 //                    $.cookie(COOKIE_NAME, user, COOKIE_OPTIONS);
@@ -22,11 +22,11 @@ $(document).ready(
             });
         });
 
-        $('#authorAdd').click(function () {
-            var $firstname = $('#firstname').val(),
-                $lastname = $('#lastname').val();
+        $('#authorAdd').on('click', function () {
+            var firstname = $('#firstname').val(),
+                lastname = $('#lastname').val();
 
-            $.post('/resource/author/add', {firstname: $firstname, lastname: $lastname}, function (data) {
+            $.post('/resource/author/add', {firstname: firstname, lastname: lastname}, function (data) {
                 console.log(data);
 
                 refresh();
@@ -53,7 +53,7 @@ function refresh() {
                 }
 
 
-                liste += "<tr><td>" + this.id + "</td><td>" + firstname + " " + lastname + "</td><td>" + this.titre + "</td><td>" + this.collection + "</td><td>" + this.shelf + "</td></tr>"
+                liste += "<tr><td>" + this.id + "</td><td>" + firstname + " " + lastname + "</td><td>" + this.title + "</td><td>" + this.collection + "</td><td>" + this.shelf + "</td></tr>"
             });
 
             $("#book tbody").html(liste);

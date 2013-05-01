@@ -1,9 +1,12 @@
 package fr.biblibouille.model;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.logging.Logger;
 
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer"})
 @Entity
 public class Book implements Serializable {
 
@@ -11,39 +14,11 @@ public class Book implements Serializable {
     private Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
     private Long id;
-
-    private String titre;
-
+    private String title;
     private String collection;
-
     private String shelf;
-
     private User owner;
-
     private Author author;
-
-    public Book() {
-
-    }
-
-    public Book(String titre, String collection, String shelf, Author author, User owner) {
-        this.titre = titre;
-        this.collection = collection;
-        this.shelf = shelf;
-        this.author = author;
-        this.owner = owner;
-//        this.author = author;
-//        this.proprietaire = proprietaire;
-    }
-
-//@ManyToOne(optional = false)
-    //private User proprietaire;
-
-    // @ManyToMany
-    // @JoinTable(name = "LIVRE_AUTEUR", joinColumns = { @JoinColumn(name =
-    // "LIVRE_ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTEUR_ID") })
-    // @LazyCollection(LazyCollectionOption.TRUE)
-    // public List<Author> auteurs = new ArrayList<Author>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,12 +30,12 @@ public class Book implements Serializable {
         this.id = id;
     }
 
-    public String getTitre() {
-        return titre;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCollection() {
@@ -79,8 +54,7 @@ public class Book implements Serializable {
         this.shelf = shelf;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "OWNER_ID", nullable = false)
+    @ManyToOne(targetEntity = User.class)
     public User getOwner() {
         return owner;
     }
@@ -89,7 +63,7 @@ public class Book implements Serializable {
         this.owner = owner;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(targetEntity = Author.class)
     public Author getAuthor() {
         return author;
     }
@@ -98,63 +72,57 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    public static Book create(String title, String collection, String etage, Author author) {
-        return new BookBuilder()
-                .withTitle(title)
-                .withCollection(collection)
-                .withShelf(etage)
-                .withAuthor(author)
-                .build();
-    }
+    public static class BookBuilder {
+        private String title;
+        private String collection;
+        private String shelf;
+        private User owner;
+        private Author author;
 
-    // TODO: check if not better solution/implementation
-    private static class BookBuilder {
-
-        private Book book;
-
-        private BookBuilder() {
-            this.book = new Book();
+        public BookBuilder(String title) {
+            this.title = title;
         }
 
-        // TODO: voir comment detruire book une fois qu'il est retourné
-        private Book build() {
-            return book;
-        }
-
-        private BookBuilder withTitle(String title) {
-            book.titre = title;
+        public BookBuilder withCollection(String collection) {
+            this.collection = collection;
 
             return this;
         }
 
-        private BookBuilder withCollection(String collection) {
-            book.collection = collection;
+        public BookBuilder withShelf(String shelf) {
+            this.shelf = shelf;
 
             return this;
         }
 
-        private BookBuilder withShelf(String shelf) {
-            book.shelf = shelf;
+        public BookBuilder withOwner(User owner) {
+            this.owner = owner;
 
             return this;
         }
 
-        private BookBuilder withAuthor(Author author) {
-            book.author = author;
+        public BookBuilder withAuthor(Author author) {
+            this.author = author;
 
             return this;
+        }
+
+        public Book build() {
+            return new Book(this);
         }
 
     }
 
-//    /**
-    //     * Permet de savoir s'il n'y a aucun champs d'initialisé dans l'objet
-//     */
-//    public Boolean estVide() {
-//        boolean estVide = Strings.isNullOrEmpty(this.titre) && Strings.isNullOrEmpty(this.collection)
-//                && Strings.isNullOrEmpty(this.shelf) && this.author == null;
-//
-//        return Boolean.valueOf(estVide);
-//    }
+    protected Book() {
+
+    }
+
+    private Book(BookBuilder bookBuilder) {
+        this.title = bookBuilder.title;
+        this.collection = bookBuilder.collection;
+        this.shelf = bookBuilder.shelf;
+        this.author = bookBuilder.author;
+        this.owner = bookBuilder.owner;
+    }
 
 }

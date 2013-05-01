@@ -13,28 +13,52 @@ public class BookHandler {
     private Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
     public Book save(Book book) {
-        EntityManager entityManager = getEntityManager();
+        EntityManager em = getEntityManager();
 
         try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(book);
-            entityManager.getTransaction().commit();
+            em.getTransaction().begin();
+
+            em.persist(book);
+
+            em.getTransaction().commit();
         } catch (Exception e) {
-            LOGGER.info(String.format("Save error"));
-            entityManager.getTransaction().rollback();
+            LOGGER.severe(String.format("Save error : %s", e.getCause()));
+
+            em.getTransaction().rollback();
+        }
+        finally {
+            em.close();
         }
 
-        LOGGER.info(String.format("Book.save (%s)", book.getTitre()));
+        LOGGER.info(String.format("Book.save (%s)", book.getTitle()));
 
         return book;
     }
 
     public List<Book> findAll() {
-        return getEntityManager().createQuery("from " + Book.class.getName()).getResultList();
+        List result;
+        EntityManager em = getEntityManager();
+
+        try {
+            result = em.createQuery("from " + Book.class.getName()).getResultList();
+        } finally {
+            em.close();
+        }
+
+        return result;
     }
 
     public Book findOne(long id) {
-        return getEntityManager().find(Book.class, id);
+        Book book;
+        EntityManager em = getEntityManager();
+
+        try {
+            book = em.find(Book.class, id);
+        } finally {
+            em.close();
+        }
+
+        return book;
     }
 
 }

@@ -14,14 +14,12 @@ public class AuthorHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-
-
     }
 
     @Test
     public void should_save_auteur() {
-        Author author1 = new Author("nom", "prenom");
-        Author author2 = new Author("nom2", "prenom2");
+        Author author1 = new Author.AuthorBuilder().withLastname("nom").withFirstname("prenom").build();
+        Author author2 = new Author.AuthorBuilder().withLastname("nom2").withFirstname("prenom2").build();
 
         authorHandler.save(author1);
         authorHandler.save(author2);
@@ -30,7 +28,7 @@ public class AuthorHandlerTest {
 
         assertThat(authors).hasSize(2);
 
-        for ( Author author : authors) {
+        for (Author author : authors) {
             assertThat(author.getId()).isNotNull();
         }
     }

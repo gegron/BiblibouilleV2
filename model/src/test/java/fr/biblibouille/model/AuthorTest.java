@@ -13,10 +13,10 @@ public class AuthorTest {
         String firstname = "prenom";
 
         // When
-        Author author = Author.create(firstname, lastname);
+        Author author = new Author.AuthorBuilder().withFirstname(firstname).withLastname(lastname).build();
 
         // Then
-        assertThat(author.getLastname()).isEqualTo(lastname);
+        assertThat(author.getLastname()).isEqualTo(lastname.toUpperCase());
         assertThat(author.getFirstname()).isEqualTo(firstname);
     }
 

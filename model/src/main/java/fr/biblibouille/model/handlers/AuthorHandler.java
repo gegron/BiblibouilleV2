@@ -19,17 +19,40 @@ public class AuthorHandler {
         entityManager.persist(author);
         entityManager.getTransaction().commit();
 
+        entityManager.close();
+
         LOGGER.info(String.format("Author.save: (%s %s)", author.getFirstname(), author.getLastname()));
 
         return author;
     }
 
     public List<Author> findAll() {
-        return getEntityManager().createQuery("from Author a order by a.lastname").getResultList();
+        List authors;
+        EntityManager em = getEntityManager();
+
+        try {
+             authors = em.createQuery("from Author a order by a.lastname").getResultList();
+        }
+        finally {
+            em.close();
+        }
+
+        return authors;
     }
 
     public Author findOne(Long id) {
-        return getEntityManager().find(Author.class, id);
+        Author author;
+        EntityManager em = getEntityManager();
+
+        try {
+            author = em.find(Author.class, id);
+        }
+        finally {
+            em.close();
+        }
+
+        return author;
     }
+
 
 }

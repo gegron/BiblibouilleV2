@@ -44,12 +44,12 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblibouilleDB" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblibouilledb" />
             <property name="javax.persistence.jdbc.user" value="bibliowner" />
             <property name="javax.persistence.jdbc.password" value="biblibouille2013" />
 
             <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
-            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilleDB" />-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb" />-->
             <!--<property name="javax.persistence.jdbc.user" value="bibliowner" />-->
             <!--<property name="javax.persistence.jdbc.password" value="biblibouille2013" />-->
 
@@ -60,6 +60,7 @@
 
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="validate" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
         </properties>
 
     </persistence-unit>

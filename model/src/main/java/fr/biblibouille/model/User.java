@@ -1,9 +1,13 @@
 package fr.biblibouille.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.google.common.collect.Lists;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * L'utilisateur représente un utilisateur du site.
@@ -17,6 +21,7 @@ import javax.persistence.Id;
  *
  * @author Legunda
  */
+@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer"})
 @Entity
 public class User {
 
@@ -27,6 +32,8 @@ public class User {
     private String password;
 
     private String email;
+
+    private Set<Book> books = new HashSet<Book>();
 
     public User() {
     }
@@ -74,6 +81,23 @@ public class User {
     @Override
     public String toString() {
         return email;
+    }
+
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE },
+            mappedBy = "owner")
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    private void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public void addBook(Book book) {
+        book.setOwner(this);
+
+        books.add(book);
     }
 
 }

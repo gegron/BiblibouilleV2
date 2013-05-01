@@ -20,24 +20,33 @@ public class BookHandlerTest {
 
     private BookHandler bookHandler = new BookHandler();
 
+    private AuthorHandler authorHandler = new AuthorHandler();
+
+    private UserHandler userHandler = UserHandler.create();
+
     private EntityManager em = getEntityManager();
 
     @Before
     public void setUp() throws Exception {
-        em.getTransaction().begin();
-
         loadBook();
-
-        em.getTransaction().commit();
     }
 
     private void loadBook() {
         User owner = new User("gegron", "password", "gerome.egron@gmail.com");
+        owner = userHandler.save(owner);
 
-        em.persist(owner);
+        Author author = authorHandler.save(new Author.AuthorBuilder().withLastname("authorName").withFirstname("authorFirstName").build());
 
-        em.persist(new Book("titre 1", "collection", "etage 1", new Author("authorName", "authorFirstName"), owner));
-        em.persist(new Book("titre 2", "collection", "etage 1", new Author("authorName", "authorFirstName"), owner));
+        Book b1 = new Book.BookBuilder("titre 1").withCollection("collection").withShelf("1").withAuthor(author).build();
+        Book b2 = new Book.BookBuilder("titre 2").withCollection("collection").withShelf("1").withAuthor(author).build();
+
+        author.getBooks().add(b1);
+        owner.addBook(b1);
+        bookHandler.save(b1);
+
+        author.getBooks().add(b2);
+        owner.addBook(b2);
+        bookHandler.save(b2);
     }
 
     @After
@@ -53,28 +62,19 @@ public class BookHandlerTest {
         // Given
         User owner = em.find(User.class, 1L);
 
-        Author author = makeDefaultAuteur();
+        Author author = authorHandler.findAll().get(0);
 
         String titre = "titre";
         String collection = "collection";
-        String etage = "etage";
+        String shelf = "shelf";
 
-        Book book = new Book(titre, collection, etage, author, owner);
+        Book book = new Book.BookBuilder(titre).withCollection(collection).withShelf(shelf).withAuthor(author).withOwner(owner).build();
 
         // When
         bookHandler.save(book);
 
         // Then
         assertThat(book.getId()).isNotNull();
-    }
-
-    @Test
-    public void should_find_book_by_id() {
-        // Given
-
-        // When
-
-        // Then
     }
 
     @Test
@@ -90,7 +90,7 @@ public class BookHandlerTest {
     }
 
     private Author makeDefaultAuteur() {
-        Author author = new Author("Dupont", "Marcel");
+        Author author = new Author.AuthorBuilder().withLastname("Dupont").withFirstname("Marcel").build();
 
         return author;
     }
