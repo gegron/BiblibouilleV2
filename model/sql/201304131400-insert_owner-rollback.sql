@@ -1,0 +1,1 @@
+DELETE FROM USER WHERE EMAIL = 'j.thoulouse@gmail.com';
