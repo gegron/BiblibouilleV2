@@ -26,7 +26,7 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="fr.biblibouille.model.jpa" >
+    <persistence-unit name="fr.biblibouille.model.jpa">
         <description>
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
@@ -35,18 +35,11 @@
         <class>fr.biblibouille.model.Book</class>
         <class>fr.biblibouille.model.User</class>
 
-
-        <!--<resource name="jdbc/biblibouille" auth="Container" type="javax.sql.DataSource">-->
-            <!--<param name="username" value="legunda" />-->
-            <!--<param name="password" value="db_3!?GmJ6" />-->
-            <!--<param name="url" value="jdbc:cloudbees://biblibouille" />-->
-        <!--</resource>-->
-
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblibouilledb" />
-            <property name="javax.persistence.jdbc.user" value="bibliowner" />
-            <property name="javax.persistence.jdbc.password" value="biblibouille2013" />
+            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblibouilledb" />-->
+            <!--<property name="javax.persistence.jdbc.user" value="bibliowner" />-->
+            <!--<property name="javax.persistence.jdbc.password" value="biblibouille2013" />-->
 
             <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb" />-->
