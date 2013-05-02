@@ -13,7 +13,7 @@ $(document).ready(
                 shelf = $('#shelf').val(),
                 authorId = $('#comboboxAuthor').val();
 
-            $.post('/gerome/resource/book/add', {title: title, collection: collection, shelf: shelf, authorId: authorId}, function (data) {
+            $.post('/resource/book/add', {title: title, collection: collection, shelf: shelf, authorId: authorId}, function (data) {
                 console.log(data);
 //                    var user = JSON.stringify(data);
 //                    $.cookie(COOKIE_NAME, user, COOKIE_OPTIONS);
@@ -26,7 +26,7 @@ $(document).ready(
             var firstname = $('#firstname').val(),
                 lastname = $('#lastname').val();
 
-            $.post('/gerome/resource/author/add', {firstname: firstname, lastname: lastname}, function (data) {
+            $.post('/resource/author/add', {firstname: firstname, lastname: lastname}, function (data) {
                 console.log(data);
 
                 refresh();
@@ -38,7 +38,7 @@ $(document).ready(
 
 function refresh() {
     $.ajax({
-        url: "/gerome/resource/book/all",
+        url: "/resource/book/all",
         data: {},
         success: function (data) {
             var liste = "";
@@ -61,7 +61,7 @@ function refresh() {
     });
 
     $.ajax({
-        url: "/gerome/resource/author/all",
+        url: "/resource/author/all",
         data: {},
         success: function (data) {
             var liste = "";

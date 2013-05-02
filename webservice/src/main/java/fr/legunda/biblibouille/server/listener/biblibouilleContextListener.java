@@ -11,4 +11,5 @@ public class BiblibouilleContextListener extends GuiceServletContextListener {
     protected Injector getInjector() {
         return Guice.createInjector(new WebModule());
     }
+
 }
