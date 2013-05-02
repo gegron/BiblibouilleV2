@@ -1,5 +1,6 @@
 package fr.legunda.biblibouille.server.resources;
 
+import com.google.inject.Inject;
 import fr.biblibouille.model.Author;
 import fr.biblibouille.model.handlers.AuthorHandler;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -15,7 +16,12 @@ public class AuthorResource extends HttpServlet {
 
     private final static ObjectMapper mapper = new ObjectMapper();
 
-    private AuthorHandler authorHandler = new AuthorHandler();
+    private AuthorHandler authorHandler;
+
+    @Inject
+    public AuthorResource(AuthorHandler authorHandler) {
+        this.authorHandler = authorHandler;
+    }
 
     /**
      * Liste de tous les auteurs

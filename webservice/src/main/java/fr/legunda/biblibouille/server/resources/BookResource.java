@@ -1,16 +1,14 @@
 package fr.legunda.biblibouille.server.resources;
 
+import com.google.inject.Inject;
 import fr.biblibouille.model.Author;
 import fr.biblibouille.model.Book;
 import fr.biblibouille.model.User;
 import fr.biblibouille.model.handlers.AuthorHandler;
 import fr.biblibouille.model.handlers.BookHandler;
 import fr.biblibouille.model.handlers.UserHandler;
-import fr.biblibouille.model.utils.EntityManagerUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.servlet.http.HttpServlet;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,11 +18,18 @@ import java.io.IOException;
 @Path("/book")
 public class BookResource extends HttpServlet {
 
-    private final static BookHandler bookHandler = new BookHandler();
+    private final BookHandler bookHandler;
 
-    private final static AuthorHandler authorHandler = new AuthorHandler();
+    private final AuthorHandler authorHandler;
 
-    private final static UserHandler userHandler = UserHandler.create();
+    private UserHandler userHandler ;
+
+    @Inject
+    public BookResource(BookHandler bookHandler, AuthorHandler authorHandler, UserHandler userHandler) {
+        this.bookHandler = bookHandler;
+        this.authorHandler = authorHandler;
+        this.userHandler = userHandler;
+    }
 
     /**
      * List all book
