@@ -1,6 +1,9 @@
 package fr.biblibouille.model.handlers;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import fr.biblibouille.model.Author;
+import fr.biblibouille.model.module.PersistenceModule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +13,15 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class AuthorHandlerTest {
 
-    private AuthorHandler authorHandler = new AuthorHandler();
+    private AuthorHandler authorHandler;
+    private Injector injector;
 
     @Before
     public void setUp() throws Exception {
+
+        injector = Guice.createInjector(new PersistenceModule());
+        authorHandler = injector.getInstance(AuthorHandler.class);
+
     }
 
     @Test

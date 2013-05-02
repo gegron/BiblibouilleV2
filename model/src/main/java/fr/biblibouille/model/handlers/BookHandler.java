@@ -1,33 +1,40 @@
 package fr.biblibouille.model.handlers;
 
+import com.google.inject.Inject;
 import fr.biblibouille.model.Book;
 
+import javax.inject.Provider;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.logging.Logger;
-
-import static fr.biblibouille.model.utils.EntityManagerUtils.getEntityManager;
 
 public class BookHandler {
 
     private Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
+    private final Provider<EntityManager> entityManagerProvider;
+
+    @Inject
+    public BookHandler(Provider<EntityManager> entityManagerProvider) {
+        this.entityManagerProvider = entityManagerProvider;
+    }
+
+
     public Book save(Book book) {
-        EntityManager em = getEntityManager();
-
+        EntityManager entityManager = entityManagerProvider.get();
         try {
-            em.getTransaction().begin();
+            entityManager.getTransaction().begin();
 
-            em.persist(book);
+            entityManager.persist(book);
 
-            em.getTransaction().commit();
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             LOGGER.severe(String.format("Save error : %s", e.getCause()));
 
-            em.getTransaction().rollback();
+            entityManager.getTransaction().rollback();
         }
         finally {
-            em.close();
+            entityManager.close();
         }
 
         LOGGER.info(String.format("Book.save (%s)", book.getTitle()));
@@ -36,29 +43,27 @@ public class BookHandler {
     }
 
     public List<Book> findAll() {
-        List result;
-        EntityManager em = getEntityManager();
+
+        EntityManager entityManager = entityManagerProvider.get();
 
         try {
-            result = em.createQuery("from " + Book.class.getName()).getResultList();
-        } finally {
-            em.close();
+            return entityManager.createQuery("from " + Book.class.getName()).getResultList();
+        }
+        finally {
+            entityManager.close();
         }
 
-        return result;
     }
 
     public Book findOne(long id) {
-        Book book;
-        EntityManager em = getEntityManager();
+        EntityManager entityManager = entityManagerProvider.get();
 
         try {
-            book = em.find(Book.class, id);
-        } finally {
-            em.close();
+            return entityManager.find(Book.class, id);
         }
-
-        return book;
+        finally {
+            entityManager.close();
+        }
     }
 
 }

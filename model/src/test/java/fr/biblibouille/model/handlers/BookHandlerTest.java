@@ -1,34 +1,45 @@
 package fr.biblibouille.model.handlers;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import fr.biblibouille.model.Author;
 import fr.biblibouille.model.Book;
 import fr.biblibouille.model.User;
-import fr.biblibouille.model.utils.EntityManagerUtils;
+import fr.biblibouille.model.module.PersistenceModule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Provider;
 import javax.persistence.EntityManager;
-
-import java.security.acl.Owner;
 import java.util.List;
 
-import static fr.biblibouille.model.utils.EntityManagerUtils.getEntityManager;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class BookHandlerTest {
 
-    private BookHandler bookHandler = new BookHandler();
+    private BookHandler bookHandler;
 
-    private AuthorHandler authorHandler = new AuthorHandler();
+    private AuthorHandler authorHandler;
 
-    private UserHandler userHandler = UserHandler.create();
+    private UserHandler userHandler;
 
-    private EntityManager em = getEntityManager();
+    private Provider<EntityManager> entityManagerProvider;
+
+    private Injector injector;
 
     @Before
     public void setUp() throws Exception {
+
+        injector = Guice.createInjector(new PersistenceModule());
+        authorHandler = injector.getInstance(AuthorHandler.class);
+        userHandler = injector.getInstance(UserHandler.class);
+        bookHandler = injector.getInstance(BookHandler.class);
+
+        entityManagerProvider = injector.getProvider(EntityManager.class);
+
         loadBook();
+
     }
 
     private void loadBook() {
@@ -51,6 +62,9 @@ public class BookHandlerTest {
 
     @After
     public void tearDown() throws Exception {
+
+        EntityManager em = entityManagerProvider.get();
+
         em.getTransaction().begin();
         em.createQuery("delete from " + Book.class.getName()).executeUpdate();
         em.createQuery("delete from " + Author.class.getName()).executeUpdate();
@@ -59,6 +73,9 @@ public class BookHandlerTest {
 
     @Test
     public void should_save_livre() {
+
+        EntityManager em = entityManagerProvider.get();
+
         // Given
         User owner = em.find(User.class, 1L);
 
