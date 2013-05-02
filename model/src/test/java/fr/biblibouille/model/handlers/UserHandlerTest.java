@@ -1,18 +1,23 @@
 package fr.biblibouille.model.handlers;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import fr.biblibouille.model.User;
-import fr.biblibouille.model.utils.EntityManagerUtils;
+import fr.biblibouille.model.module.PersistenceModule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Provider;
 import javax.persistence.EntityManager;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class UserHandlerTest {
 
-    private UserHandler userHandler = UserHandler.create();
+    private UserHandler userHandler;
+
+    private Provider<EntityManager> entityManagerProvider;
 
     private String EMAIL_USER_TEST = "userLogin@test.com";
 
@@ -21,13 +26,22 @@ public class UserHandlerTest {
 
     @Before
     public void setUp() throws Exception {
+
+        Injector injector = Guice.createInjector(new PersistenceModule());
+        userHandler = injector.getInstance(UserHandler.class);
+        entityManagerProvider = injector.getProvider(EntityManager.class);
+
+        save();
+
+    }
+
+    public void save() throws Exception {
         userHandler.save(new User(LOGIN_USER_TEST, "qkfdqdsf", EMAIL_USER_TEST));
     }
 
     @After
     public void tearDown() throws Exception {
-        EntityManager em = EntityManagerUtils.getEntityManager();
-
+        EntityManager em = entityManagerProvider.get();
         try {
             em.getTransaction().begin();
             em.createQuery("delete from User where email = :email").setParameter("email", EMAIL_USER_TEST).executeUpdate();

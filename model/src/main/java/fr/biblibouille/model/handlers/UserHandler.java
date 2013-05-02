@@ -1,33 +1,41 @@
 package fr.biblibouille.model.handlers;
 
+import com.google.inject.Inject;
 import fr.biblibouille.model.User;
 
+import javax.inject.Provider;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 import java.util.logging.Logger;
-
-import static fr.biblibouille.model.utils.EntityManagerUtils.getEntityManager;
 
 public class UserHandler {
 
     // FIXME: slf4j
     private Logger LOGGER = Logger.getLogger(UserHandler.class.getName());
 
+    private final Provider<EntityManager> entityManagerProvider;
+
+    @Inject
+    public UserHandler(Provider<EntityManager> entityManagerProvider) {
+        this.entityManagerProvider = entityManagerProvider;
+    }
+
     public User save(User user) {
-        EntityManager em = getEntityManager();
+
+        EntityManager entityManager = entityManagerProvider.get();
 
         try {
-            em.getTransaction().begin();
-            em.persist(user);
-            em.getTransaction().commit();
+            entityManager.getTransaction().begin();
+            entityManager.persist(user);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
             LOGGER.severe("Unable to save user");
 
-            em.getTransaction().rollback();
+            entityManager.getTransaction().rollback();
         }
         finally {
-            em.close();
+            entityManager.close();
         }
 
         LOGGER.info(String.format("User.save: (%s %s)", user.getEmail(), user.getLogin()));
@@ -36,38 +44,30 @@ public class UserHandler {
     }
 
     public List<User> findAll() {
-        List results;
-        EntityManager em = getEntityManager();
 
+        EntityManager entityManager = entityManagerProvider.get();
         try {
-            results = em.createQuery("from User u").getResultList();
+            return entityManager.createQuery("from User u").getResultList();
         }
         finally {
-            em.close();
+            entityManager.close();
         }
-
-        return results;
     }
 
     public User findOne(Long id) {
-        EntityManager em = getEntityManager();
-        User user;
-
+        EntityManager entityManager = entityManagerProvider.get();
         try {
-            user = em.find(User.class, id);
+            return entityManager.find(User.class, id);
         }
         finally {
-            em.close();
+            entityManager.close();
         }
-
-        return user;
     }
 
     public User findByEmail(String email) {
+        EntityManager entityManager = entityManagerProvider.get();
         User user;
-        EntityManager em = getEntityManager();
-
-        Query query = em.createQuery("from User u where u.email = :email");
+        Query query = entityManager.createQuery("from User u where u.email = :email");
         query.setParameter("email", email);
 
         try {
@@ -75,36 +75,23 @@ public class UserHandler {
             user.getBooks().size();
         }
         finally {
-            em.close();
+            entityManager.close();
         }
 
         return user;
     }
 
     public User findByLogin(String login) {
-        User user;
-        EntityManager em = getEntityManager();
-
-        Query query = em.createQuery("from User u where u.login = :login");
+        EntityManager entityManager = entityManagerProvider.get();
+        Query query = entityManager.createQuery("from User u where u.login = :login");
         query.setParameter("login", login);
 
         try {
-            user = (User) query.getSingleResult();
+            return (User) query.getSingleResult();
         }
         finally {
-            em.close();
+            entityManager.close();
         }
-
-        return user;
-    }
-
-    // Constrcuctor factory
-
-    private UserHandler() {
-    }
-
-    public static UserHandler create() {
-        return new UserHandler();
     }
 
 }

@@ -1,19 +1,27 @@
 package fr.biblibouille.model.handlers;
 
+import com.google.inject.Inject;
 import fr.biblibouille.model.Author;
 
+import javax.inject.Provider;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.logging.Logger;
-
-import static fr.biblibouille.model.utils.EntityManagerUtils.getEntityManager;
 
 public class AuthorHandler {
 
     private Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
+    private final Provider<EntityManager> entityManagerProvider;
+
+    @Inject
+    public AuthorHandler(Provider<EntityManager> entityManagerProvider) {
+        this.entityManagerProvider = entityManagerProvider;
+    }
+
     public Author save(Author author) {
-        EntityManager entityManager = getEntityManager();
+
+        EntityManager entityManager = entityManagerProvider.get();
 
         entityManager.getTransaction().begin();
         entityManager.persist(author);
@@ -27,31 +35,25 @@ public class AuthorHandler {
     }
 
     public List<Author> findAll() {
-        List authors;
-        EntityManager em = getEntityManager();
-
+        EntityManager entityManager = entityManagerProvider.get();
         try {
-             authors = em.createQuery("from Author a order by a.lastname").getResultList();
+             return entityManager.createQuery("from Author a order by a.lastname").getResultList();
         }
         finally {
-            em.close();
+            entityManager.close();
         }
-
-        return authors;
     }
 
     public Author findOne(Long id) {
-        Author author;
-        EntityManager em = getEntityManager();
+
+        EntityManager entityManager = entityManagerProvider.get();
 
         try {
-            author = em.find(Author.class, id);
+            return entityManager.find(Author.class, id);
         }
         finally {
-            em.close();
+            entityManager.close();
         }
-
-        return author;
     }
 
 
