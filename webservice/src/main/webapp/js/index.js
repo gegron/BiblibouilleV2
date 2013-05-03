@@ -64,13 +64,14 @@ function refresh() {
         url: "/resource/author/all",
         data: {},
         success: function (data) {
-            var liste = "";
-
-            $.each(data, function () {
-                liste += "<tr><td>" + this.id + "</td><td>" + this.firstname + "</td><td>" + this.lastname + "</td></tr>"
-            });
-
-            $("#author tbody").html(liste);
+            // DEBUG -> Display author list
+            //            var liste = "";
+            //
+            //            $.each(data, function () {
+            //                liste += "<tr><td>" + this.id + "</td><td>" + this.firstname + "</td><td>" + this.lastname + "</td></tr>"
+            //            });
+            //
+            //            $("#author tbody").html(liste);
 
             $.each(data, function() {
                 $('#comboboxAuthor')
