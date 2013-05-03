@@ -1,6 +1,7 @@
 package fr.biblibouille.model.handlers;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import fr.biblibouille.model.User;
 import fr.biblibouille.model.module.PersistenceModule;
@@ -13,10 +14,12 @@ import javax.persistence.EntityManager;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class UserHandlerTest {
+public class UserHandlerTest extends AbstractIntegrationTest {
 
+    @Inject
     private UserHandler userHandler;
 
+    @Inject
     private Provider<EntityManager> entityManagerProvider;
 
     private String EMAIL_USER_TEST = "userLogin@test.com";
@@ -27,10 +30,7 @@ public class UserHandlerTest {
     @Before
     public void setUp() throws Exception {
 
-        Injector injector = Guice.createInjector(new PersistenceModule());
-        userHandler = injector.getInstance(UserHandler.class);
-        entityManagerProvider = injector.getProvider(EntityManager.class);
-
+        super.setUp();
         save();
 
     }

@@ -1,6 +1,7 @@
 package fr.biblibouille.model.handlers;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import fr.biblibouille.model.Author;
 import fr.biblibouille.model.Book;
@@ -16,30 +17,24 @@ import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class BookHandlerTest {
+public class BookHandlerTest extends AbstractIntegrationTest{
 
+    @Inject
     private BookHandler bookHandler;
 
+    @Inject
     private AuthorHandler authorHandler;
 
+    @Inject
     private UserHandler userHandler;
 
+    @Inject
     private Provider<EntityManager> entityManagerProvider;
-
-    private Injector injector;
 
     @Before
     public void setUp() throws Exception {
-
-        injector = Guice.createInjector(new PersistenceModule());
-        authorHandler = injector.getInstance(AuthorHandler.class);
-        userHandler = injector.getInstance(UserHandler.class);
-        bookHandler = injector.getInstance(BookHandler.class);
-
-        entityManagerProvider = injector.getProvider(EntityManager.class);
-
+        super.setUp();
         loadBook();
-
     }
 
     private void loadBook() {
