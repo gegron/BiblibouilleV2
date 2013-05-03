@@ -125,4 +125,9 @@ public class Book implements Serializable {
         this.owner = bookBuilder.owner;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s (%s, %s)", title, collection, shelf);
+    }
+
 }

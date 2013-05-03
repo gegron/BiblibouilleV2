@@ -1,5 +1,6 @@
 package fr.biblibouille.model;
 
+import com.google.common.base.Objects;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -100,6 +101,31 @@ public class Author implements Serializable {
     private Author(AuthorBuilder authorBuilder) {
         this.lastname = authorBuilder.lastname;
         this.firstname = authorBuilder.firstname;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s", lastname, firstname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.firstname, this.lastname);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) {
+            return false;
+        }
+
+        if(getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Author other = (Author) obj;
+
+        return Objects.equal(this.firstname, other.getFirstname()) && Objects.equal(this.lastname, other.getLastname());
     }
 
 }
