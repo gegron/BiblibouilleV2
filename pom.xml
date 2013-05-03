@@ -12,6 +12,7 @@
     <modules>
         <module>model</module>
         <module>webservice</module>
+        <module>batch</module>
     </modules>
 
     <properties>
