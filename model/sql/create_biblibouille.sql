@@ -21,7 +21,7 @@ CREATE TABLE `Author` (
   `firstname` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Table structure for table `User`
@@ -35,7 +35,7 @@ CREATE TABLE `User` (
   `login` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --
@@ -56,5 +56,5 @@ CREATE TABLE `Book` (
   KEY `FK1FAF0918F694D7` (`OWNER_ID`),
   CONSTRAINT `FK1FAF0918F694D7` FOREIGN KEY (`OWNER_ID`) REFERENCES `User` (`id`),
   CONSTRAINT `FK1FAF09CA67E77F` FOREIGN KEY (`author_id`) REFERENCES `Author` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
