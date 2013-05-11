@@ -3,7 +3,8 @@ $(document).ready(
         refresh();
 
         $('#comboboxAuthor').select2({
-            placeholder: "Sélectionner un auteur"
+            placeholder: "Sélectionner un auteur",
+            minimumInputLength: 4
         });
 
         // Initialisation du bouton d'ajout des livres
