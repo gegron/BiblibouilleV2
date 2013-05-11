@@ -7,7 +7,10 @@ $(document).ready(
             minimumInputLength: 4
         });
 
-        // Initialisation du bouton d'ajout des livres
+        /***********************************
+            BEGIN: BUTTON INITIALISATION
+         ***********************************
+         */
         $('#bookAdd').on('click', function () {
             var title = $('#title').val(),
                 collection = $('#collection').val(),
@@ -34,6 +37,10 @@ $(document).ready(
             });
         });
 
+        /***********************************
+         END: BUTTON INITIALISATION
+         ***********************************
+         */
     }
 );
 
@@ -42,22 +49,14 @@ function refresh() {
         url: "/resource/book/all",
         data: {},
         success: function (data) {
-            var liste = "";
+            var list = "";
+            var lineTemplate = "<tr><td>{{id}}</td><td>{{author.firstname}} {{author.lastname}}</td><td>{{title}}</td><td>{{collection}}</td><td>{{shelf}}</td></tr>";
 
             $.each(data, function () {
-                var firstname = "",
-                    lastname = "";
-
-                if (this.author != null) {
-                    firstname = this.author.firstname,
-                        lastname = this.author.lastname;
-                }
-
-
-                liste += "<tr><td>" + this.id + "</td><td>" + firstname + " " + lastname + "</td><td>" + this.title + "</td><td>" + this.collection + "</td><td>" + this.shelf + "</td></tr>"
+                list += Mustache.render(lineTemplate, this);
             });
 
-            $("#book tbody").html(liste);
+            $("#book tbody").html(list);
         }
     });
 
@@ -65,23 +64,15 @@ function refresh() {
         url: "/resource/author/all",
         data: {},
         success: function (data) {
-            // DEBUG -> Display author list
-            //            var liste = "";
-            //
-            //            $.each(data, function () {
-            //                liste += "<tr><td>" + this.id + "</td><td>" + this.firstname + "</td><td>" + this.lastname + "</td></tr>"
-            //            });
-            //
-            //            $("#author tbody").html(liste);
+            var template = "{{firstname}} {{lastname}}";
 
             $.each(data, function() {
                 $('#comboboxAuthor')
                     .append($("<option></option>")
                         .attr("value",this.id)
-                        .text(this.firstname + " " + this.lastname));
+                        .text(Mustache.render(template, this)));
             });
         }
     });
-
 
 }
