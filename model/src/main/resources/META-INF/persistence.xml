@@ -36,23 +36,18 @@
         <class>fr.biblibouille.model.User</class>
 
         <properties>
-            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
-            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/biblibouilledb" />-->
-            <!--<property name="javax.persistence.jdbc.user" value="bibliowner" />-->
-            <!--<property name="javax.persistence.jdbc.password" value="biblibouille2013" />-->
+            <property name="javax.persistence.jdbc.driver" value="${javax.persistence.jdbc.driver}" />
+            <property name="javax.persistence.jdbc.url" value="${javax.persistence.jdbc.url}" />
+            <property name="javax.persistence.jdbc.user" value="${javax.persistence.jdbc.user}" />
+            <property name="javax.persistence.jdbc.password" value="${javax.persistence.jdbc.password}" />
 
-            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />-->
-            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb" />-->
-            <!--<property name="javax.persistence.jdbc.user" value="bibliowner" />-->
-            <!--<property name="javax.persistence.jdbc.password" value="biblibouille2013" />-->
-
-            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE" />
-            <property name="javax.persistence.jdbc.user" value="sa" />
-            <property name="javax.persistence.jdbc.password" value="" />
+            <!--<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE" />-->
+            <!--<property name="javax.persistence.jdbc.user" value="sa" />-->
+            <!--<property name="javax.persistence.jdbc.password" value="" />-->
 
             <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
         </properties>
 
