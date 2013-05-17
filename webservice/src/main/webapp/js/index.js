@@ -11,7 +11,7 @@ $(document).ready(
 
         $('#comboboxAuthor').select2({
             placeholder: "Sélectionner un auteur",
-            minimumInputLength: 4
+            minimumInputLength: 2
         });
 
         /***********************************
