@@ -72,7 +72,30 @@ public class Book implements Serializable {
         this.author = author;
     }
 
+    public void update(Book newBook) {
+        if(newBook.title != null) {
+            this.title = newBook.title;
+        }
+
+        if(newBook.collection != null) {
+            this.collection = newBook.collection;
+        }
+
+        if(newBook.shelf != null) {
+            this.shelf = newBook.shelf;
+        }
+
+        if(newBook.owner != null) {
+            this.owner = newBook.owner;
+        }
+
+        if(newBook.author != null) {
+            this.author = newBook.author;
+        }
+    }
+
     public static class BookBuilder {
+        private Long id;
         private String title;
         private String collection;
         private String shelf;
@@ -107,6 +130,12 @@ public class Book implements Serializable {
             return this;
         }
 
+        public BookBuilder withId(Long id) {
+            this.id = id;
+
+            return this;
+        }
+
         public Book build() {
             return new Book(this);
         }
@@ -118,6 +147,7 @@ public class Book implements Serializable {
     }
 
     private Book(BookBuilder bookBuilder) {
+        this.id = bookBuilder.id;
         this.title = bookBuilder.title;
         this.collection = bookBuilder.collection;
         this.shelf = bookBuilder.shelf;
