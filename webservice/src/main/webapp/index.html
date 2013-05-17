@@ -125,16 +125,16 @@
                         </tr>
                     </script>
                     <script id="bookEditableTpl" type="text/template">
-                        <tr id="bookEditable{{id}}" class="bookEditable">
-                            <td>{{author}}</td>
-                            <td><input id="title{{id}}" name="title{{id}}" value="{{title}}" /></td>
-                            <td><input id="collection{{id}}" name="collection{{id}}" value="{{collection}}" /></td>
-                            <td><input style='width: 50px' id="shelf{{id}}" name="shelf{{id}}" value="{{shelf}}" /></td>
-                            <td>
-                                <span style='cursor: pointer'><img title='sauvegarder' alt='sauvegarder' src='./img/icon_save.png' onclick='saveModifiedBook({{id}})' /></span>
-                                <span style='cursor: pointer'><img title='annuler' alt='annuler' src='./img/icon_cancel.png' onclick='removeBookEditable({{id}})' /></span>
-                            </td>
-                        </tr>
+                            <tr id="bookEditable{{id}}" class="bookEditable">
+                                <td>{{author}}</td>
+                                <td><input id="title{{id}}" name="title{{id}}" value="{{title}}" /></td>
+                                <td><input id="collection{{id}}" name="collection{{id}}" value="{{collection}}" /></td>
+                                <td><input style='width: 50px' id="shelf{{id}}" name="shelf{{id}}" value="{{shelf}}" /></td>
+                                <td>
+                                    <span style='cursor: pointer'><img title='sauvegarder' alt='sauvegarder' src='./img/icon_save.png' onclick='saveModifiedBook({{id}})' /></span>
+                                    <span style='cursor: pointer'><img title='annuler' alt='annuler' src='./img/icon_cancel.png' onclick='stopBookEdition({{id}})' /></span>
+                                </td>
+                            </tr>
                     </script>
                 </tbody>
             </table>
