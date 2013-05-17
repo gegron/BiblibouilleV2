@@ -11,6 +11,7 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/select2/select2.css" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
 
     <style>
         body {
@@ -103,14 +104,38 @@
             <table id="book" class="table">
                 <thead>
                 <tr>
-                    <td>#</td>
-                    <td>Auteur</td>
-                    <td>Titre</td>
-                    <td>Collection</td>
-                    <td>Etagère</td>
+                    <!--<td>#</td>-->
+                    <th>Auteur</th>
+                    <th>Titre</th>
+                    <th>Collection</th>
+                    <th>Etagère</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
+                    <script id="bookTpl" type="text/template">
+                        <tr id="book{{id}}">
+                            <td name="author">{{author.firstname}} {{author.lastname}}</td>
+                            <td name="title">{{title}}</td>
+                            <td name="collection">{{collection}}</td>
+                            <td name="shelf">{{shelf}}</td>
+                            <td>
+                                <span style='cursor: pointer'><img id='bookEditableButton{{id}}' title='editer' alt='editer' src='./img/icon_edit.png' onclick='makeBookEditable({{id}})' /></span>
+                            </td>
+                        </tr>
+                    </script>
+                    <script id="bookEditableTpl" type="text/template">
+                        <tr id="bookEditable{{id}}" class="bookEditable">
+                            <td>{{author}}</td>
+                            <td><input id="title{{id}}" name="title{{id}}" value="{{title}}" /></td>
+                            <td><input id="collection{{id}}" name="collection{{id}}" value="{{collection}}" /></td>
+                            <td><input style='width: 50px' id="shelf{{id}}" name="shelf{{id}}" value="{{shelf}}" /></td>
+                            <td>
+                                <span style='cursor: pointer'><img title='sauvegarder' alt='sauvegarder' src='./img/icon_save.png' onclick='saveModifiedBook({{id}})' /></span>
+                                <span style='cursor: pointer'><img title='annuler' alt='annuler' src='./img/icon_cancel.png' onclick='removeBookEditable({{id}})' /></span>
+                            </td>
+                        </tr>
+                    </script>
                 </tbody>
             </table>
 

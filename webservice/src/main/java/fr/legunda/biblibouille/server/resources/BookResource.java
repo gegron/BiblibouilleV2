@@ -78,4 +78,24 @@ public class BookResource extends HttpServlet {
         return Response.ok(mapper.writeValueAsString(result)).build();
     }
 
+    /**
+     * Ajout d'un bouquin
+     *
+     */
+    @POST
+    @Path("/update")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(@FormParam("id") long bookId, @FormParam("title") String title, @FormParam("collection") String collection, @FormParam("shelf") String shelf, @FormParam("authorId") long authorId) throws IOException {
+        Author author = authorHandler.findOne(authorId);
+        User owner = userHandler.findByEmail("j.thoulouse@gmail.com");
+
+        Book book = new Book.BookBuilder(title).withCollection(collection).withShelf(shelf).withAuthor(author).withOwner(owner).withId(bookId).build();
+
+        bookHandler.update(book);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        return Response.ok(mapper.writeValueAsString(book)).build();
+    }
+
 }

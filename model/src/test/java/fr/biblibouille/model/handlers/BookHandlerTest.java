@@ -101,6 +101,23 @@ public class BookHandlerTest extends AbstractIntegrationTest{
         assertThat(result).hasSize(2);
     }
 
+    @Test
+    public void should_update_title_for_book() {
+        // Given
+        String updatedTitle = "Updated Title";
+        Book newBook = new Book.BookBuilder(updatedTitle).withId(1L).build();
+
+        // When
+        bookHandler.update(newBook);
+
+        // Then
+        EntityManager entityManager = entityManagerProvider.get();
+        Book updatedBook = entityManager.find(Book.class, 1L);
+
+        assertThat(updatedBook.getTitle()).isEqualTo(updatedTitle);
+    }
+
+
     private Author makeDefaultAuteur() {
         Author author = new Author.AuthorBuilder().withLastname("Dupont").withFirstname("Marcel").build();
 

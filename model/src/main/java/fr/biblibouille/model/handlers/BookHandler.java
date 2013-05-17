@@ -1,7 +1,9 @@
 package fr.biblibouille.model.handlers;
 
 import com.google.inject.Inject;
+import fr.biblibouille.model.Author;
 import fr.biblibouille.model.Book;
+import fr.biblibouille.model.User;
 
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
@@ -18,7 +20,6 @@ public class BookHandler {
     public BookHandler(Provider<EntityManager> entityManagerProvider) {
         this.entityManagerProvider = entityManagerProvider;
     }
-
 
     public Book save(Book book) {
         EntityManager entityManager = entityManagerProvider.get();
@@ -43,7 +44,6 @@ public class BookHandler {
     }
 
     public List<Book> findAll() {
-
         EntityManager entityManager = entityManagerProvider.get();
 
         try {
@@ -52,7 +52,6 @@ public class BookHandler {
         finally {
             entityManager.close();
         }
-
     }
 
     public Book findOne(long id) {
@@ -60,6 +59,26 @@ public class BookHandler {
 
         try {
             return entityManager.find(Book.class, id);
+        }
+        finally {
+            entityManager.close();
+        }
+    }
+
+    public void update(Book newBook) {
+        EntityManager entityManager = entityManagerProvider.get();
+
+        try {
+            entityManager.getTransaction().begin();
+
+            Book book = entityManager.find(Book.class, newBook.getId());
+            book.update(newBook);
+
+            entityManager.merge(book);
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e) {
+            entityManager.getTransaction().rollback();
         }
         finally {
             entityManager.close();
