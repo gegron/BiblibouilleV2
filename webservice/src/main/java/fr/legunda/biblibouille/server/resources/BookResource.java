@@ -22,7 +22,7 @@ public class BookResource extends HttpServlet {
 
     private final AuthorHandler authorHandler;
 
-    private UserHandler userHandler ;
+    private UserHandler userHandler;
 
     @Inject
     public BookResource(BookHandler bookHandler, AuthorHandler authorHandler, UserHandler userHandler) {
@@ -60,7 +60,6 @@ public class BookResource extends HttpServlet {
 
     /**
      * Ajout d'un bouquin
-     *
      */
     @POST
     @Path("/add")
@@ -80,7 +79,6 @@ public class BookResource extends HttpServlet {
 
     /**
      * Ajout d'un bouquin
-     *
      */
     @POST
     @Path("/update")
