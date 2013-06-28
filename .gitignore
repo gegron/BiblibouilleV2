@@ -5,6 +5,10 @@
 *.war
 *.ear
 
+# Ignore geretared file
+*/target
+out
+
 # Ignore all dotfiles...
 .*
 *.iml
