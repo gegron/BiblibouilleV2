@@ -9,6 +9,9 @@
 */target
 out
 
+# Working file
+ignore
+
 # Ignore all dotfiles...
 .*
 *.iml
