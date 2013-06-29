@@ -18,7 +18,7 @@ public class PersistenceModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("cloudbees.biblibouilledb");
+        entityManagerFactory = Persistence.createEntityManagerFactory("jdbc/cloudbees.biblibouilledb");
 //        entityManagerFactory = Persistence.createEntityManagerFactory("fr.biblibouille.model.jpa");
         bind(AuthorHandler.class);
         bind(BookHandler.class);
