@@ -26,7 +26,8 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="fr.biblibouille.model.jpa" >
+    <!--<persistence-unit name="fr.biblibouille.model.jpa" >-->
+    <persistence-unit name="cloudbees.biblibouilledb" >
         <description>
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
