@@ -27,7 +27,7 @@
              version="2.0">
 
     <!--<persistence-unit name="fr.biblibouille.model.jpa" >-->
-    <persistence-unit name="jdbc/cloudbees.biblibouilledb" >
+    <persistence-unit name="fr.biblibouille.model.jpa" >
         <description>
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
