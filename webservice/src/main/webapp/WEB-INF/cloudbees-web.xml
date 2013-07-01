@@ -13,25 +13,25 @@
     <!-- DataSources (use names referenced via <resource-ref> in WEB-INF/web.xml) -->
     <!-- Database resource -->
 
-    <resource name="jdbc/biblibouilledb" auth="Container" type="javax.sql.DataSource"
-              maxActive="50" maxIdle="30" maxWait="10000"
-              username="bibliowner" password="biblibouille2013"
-              driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb"/>
+    <!--<resource name="jdbc/biblibouilledb" auth="Container" type="javax.sql.DataSource"-->
+              <!--maxActive="50" maxIdle="30" maxWait="10000"-->
+              <!--username="bibliowner" password="biblibouille2013"-->
+              <!--driverClassName="com.mysql.jdbc.Driver"-->
+              <!--url="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb"/>-->
 
 
-    <!--<resource name="jdbc/biblibouilledb" auth="Container" type="javax.sql.DataSource">-->
-        <!--&lt;!&ndash;<param name="username" value="${db.username}"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<param name="password" value="${db.password}"/>&ndash;&gt;-->
-        <!--<param name="username" value="bibliowner"/>-->
-        <!--<param name="password" value="biblibouille2013"/>-->
-        <!--<param name="url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb"/>-->
-        <!--<param name="validationQuery" value="SELECT 1"/>-->
-        <!--<param name="testOnBorrow" value="true"/>-->
-        <!--<param name="validationInterval" value="15000"/>-->
-        <!--<param name="maxActive" value="1"/>-->
-        <!--<param name="maxIdle" value="1"/>-->
-        <!--<param name="maxWait" value="15000"/>-->
-    <!--</resource>-->
+    <resource name="jdbc/biblibouilledb" auth="Container" type="javax.sql.DataSource">
+        <!--<param name="username" value="${db.username}"/>-->
+        <!--<param name="password" value="${db.password}"/>-->
+        <param name="username" value="bibliowner"/>
+        <param name="password" value="biblibouille2013"/>
+        <param name="url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb"/>
+        <param name="validationQuery" value="SELECT 1"/>
+        <param name="testOnBorrow" value="true"/>
+        <param name="validationInterval" value="15000"/>
+        <param name="maxActive" value="1"/>
+        <param name="maxIdle" value="1"/>
+        <param name="maxWait" value="15000"/>
+    </resource>
 
 </cloudbees-web-app>
