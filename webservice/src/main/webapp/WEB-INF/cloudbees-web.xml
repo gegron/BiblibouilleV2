@@ -13,7 +13,7 @@
     <!-- DataSources (use names referenced via <resource-ref> in WEB-INF/web.xml) -->
     <!-- Database resource -->
 
-    <resource name="jdbc/myDB" auth="Container" type="javax.sql.DataSource">
+    <resource name="jdbc/biblibouilledb" auth="Container" type="javax.sql.DataSource">
         <!--<param name="username" value="${db.username}"/>-->
         <!--<param name="password" value="${db.password}"/>-->
         <param name="username" value="bibliowner"/>
