@@ -9,10 +9,22 @@
         <!--<param-value>PARAM_VALUE</param-value>-->
     <!--</context-param>-->
 
+
     <!-- DataSources (use names referenced via <resource-ref> in WEB-INF/web.xml) -->
-    <resource name="jdbc/DATASOURCE_NAME" auth="Container" type="javax.sql.DataSource">
-        <param name="username" value="DB_USER" />
-        <param name="password" value="DB_PASS" />
-        <param name="url" value="jdbc:mysql://DB_HOST:3306/DB_NAME" />
+    <!-- Database resource -->
+
+    <resource name="jdbc/myDB" auth="Container" type="javax.sql.DataSource">
+        <!--<param name="username" value="${db.username}"/>-->
+        <!--<param name="password" value="${db.password}"/>-->
+        <param name="username" value="bibliowner"/>
+        <param name="password" value="biblibouille2013"/>
+        <param name="url" value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/biblibouilledb"/>
+        <param name="validationQuery" value="SELECT 1"/>
+        <param name="testOnBorrow" value="true"/>
+        <param name="validationInterval" value="15000"/>
+        <param name="maxActive" value="1"/>
+        <param name="maxIdle" value="1"/>
+        <param name="maxWait" value="15000"/>
     </resource>
+
 </cloudbees-web-app>
