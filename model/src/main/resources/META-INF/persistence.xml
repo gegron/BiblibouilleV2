@@ -31,7 +31,10 @@
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
 
-        <jta-data-source>java:/jdbc/biblibouilledb</jta-data-source>
+        <jta-data-source>java:comp/env/jdbc/biblibouilledb</jta-data-source>
+        <!--<jta-data-source>java:/jdbc/biblibouilledb</jta-data-source>-->
+
+        <!--jdbc/biblibouilledb-->
 
         <!--<non-jta-data-source>java:comp/env/jdbc/biblibouilledb</non-jta-data-source>-->
 
