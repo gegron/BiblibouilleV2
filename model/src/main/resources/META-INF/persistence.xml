@@ -26,7 +26,7 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="fr.biblibouille.model.jpa" transaction-type="JTA">
+    <persistence-unit name="fr.biblibouille.model.jpa" transaction-type="RESOURCE_LOCAL">
         <description>
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
@@ -38,7 +38,7 @@
         <!--jdbc/biblibouilledb-->
 
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>java:comp/env/jdbc/biblibouilledb</jta-data-source>
+        <non-jta-data-source>java:comp/env/jdbc/biblibouilledb</non-jta-data-source>
 
         <class>fr.biblibouille.model.Author</class>
         <class>fr.biblibouille.model.Book</class>
