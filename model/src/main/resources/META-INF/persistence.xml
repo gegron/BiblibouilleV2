@@ -44,6 +44,13 @@
         <class>fr.biblibouille.model.Book</class>
         <class>fr.biblibouille.model.User</class>
 
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="connection.autocommit" value="false"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.show_sql" value="false"/>
+        </properties>
+
         <!--<properties>-->
             <!--<property name="javax.persistence.jdbc.driver" value="${javax.persistence.jdbc.driver}" />-->
 
