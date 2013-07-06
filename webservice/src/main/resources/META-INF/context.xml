@@ -1,0 +1,18 @@
+<Context>
+
+    <Resource name="jdbc/biblibouilledb" auth="Container" type="javax.sql.DataSource"
+              username="bibliowner" password="biblibouille2013"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/biblibouilledb"
+              maxActive="20"
+              maxIdle="1"
+              maxWait="10000"
+              removeAbandoned="true"
+              removeAbandonedTimeout="60"
+              logAbandoned="true"
+
+              validationQuery="SELECT 1"
+              testOnBorrow="true"
+            />
+
+</Context>
