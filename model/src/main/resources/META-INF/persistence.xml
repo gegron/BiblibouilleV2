@@ -38,7 +38,7 @@
         <!--jdbc/biblibouilledb-->
 
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <non-jta-data-source>java:comp/env/jdbc/biblibouilledb</non-jta-data-source>
+        <non-jta-data-source>java:/comp/env/jdbc/biblibouilledb</non-jta-data-source>
 
         <class>fr.biblibouille.model.Author</class>
         <class>fr.biblibouille.model.Book</class>
