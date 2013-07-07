@@ -14,25 +14,6 @@ $(document).ready(
             minimumInputLength: 2
         });
 
-        /***********************************
-            BEGIN: BUTTON INITIALISATION
-         ***********************************
-         */
-        $('#bookAdd').on('click', function () {
-            var title = $('#title').val(),
-                collection = $('#collection').val(),
-                shelf = $('#shelf').val(),
-                authorId = $('#comboboxAuthor').val();
-
-            $.post('/resource/book/add', {title: title, collection: collection, shelf: shelf, authorId: authorId}, function (data) {
-                console.log(data);
-//                    var user = JSON.stringify(data);
-//                    $.cookie(COOKIE_NAME, user, COOKIE_OPTIONS);
-//                    configureLoginButton(data);
-                refresh();
-            });
-        });
-
         $('#authorAdd').on('click', function () {
             var firstname = $('#firstname').val(),
                 lastname = $('#lastname').val();
@@ -80,6 +61,27 @@ function refresh() {
                         .text(Mustache.render(template, this)));
             });
         }
+    });
+
+    /***********************************
+     BEGIN: BUTTON INITIALISATION
+     ***********************************
+     */
+    $('#bookAdd').on('click', function () {
+        console.log('INFO: Save button click');
+
+        var title = $('#title').val(),
+            collection = $('#collection').val(),
+            shelf = $('#shelf').val(),
+            authorId = $('#comboboxAuthor').val();
+
+        $.post('/resource/book/add', {title: title, collection: collection, shelf: shelf, authorId: authorId}, function (data) {
+            console.log(data);
+//                    var user = JSON.stringify(data);
+//                    $.cookie(COOKIE_NAME, user, COOKIE_OPTIONS);
+//                    configureLoginButton(data);
+            refresh();
+        });
     });
 
 }

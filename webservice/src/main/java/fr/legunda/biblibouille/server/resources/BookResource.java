@@ -14,9 +14,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 @Path("/book")
 public class BookResource extends HttpServlet {
+
+    private Logger LOGGER = Logger.getLogger(this.getClass().getName());
 
     private final BookHandler bookHandler;
 
@@ -65,6 +68,8 @@ public class BookResource extends HttpServlet {
     @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
     public Response post(@FormParam("title") String title, @FormParam("collection") String collection, @FormParam("shelf") String shelf, @FormParam("authorId") long authorId) throws IOException {
+        LOGGER.info("Call save book action");
+
         Author author = authorHandler.findOne(authorId);
         User owner = userHandler.findByEmail("j.thoulouse@gmail.com");
 
