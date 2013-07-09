@@ -82,9 +82,9 @@ function refresh() {
             url: '/resource/book/add',
             data: {title: title, collection: collection, shelf: shelf, authorId: authorId},
             success: function (data) {
-                alert('Save call return: ' + data);
+                alert('Nouveau livre enregistré');
 
-//                refresh();
+                refresh();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert('Impossible de sauvegarder le livre.');
