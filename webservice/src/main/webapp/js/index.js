@@ -67,6 +67,7 @@ function refresh() {
      BEGIN: BUTTON INITIALISATION
      ***********************************
      */
+    $('#bookAdd').unbind('click');
     $('#bookAdd').on('click', function () {
         console.log('INFO: Save button click');
 
@@ -75,13 +76,32 @@ function refresh() {
             shelf = $('#shelf').val(),
             authorId = $('#comboboxAuthor').val();
 
-        $.post('/resource/book/add', {title: title, collection: collection, shelf: shelf, authorId: authorId}, function (data) {
-            console.log(data);
-//                    var user = JSON.stringify(data);
-//                    $.cookie(COOKIE_NAME, user, COOKIE_OPTIONS);
-//                    configureLoginButton(data);
-            refresh();
+
+        $.ajax({
+            type: "POST",
+            url: '/resource/book/add',
+            data: {title: title, collection: collection, shelf: shelf, authorId: authorId},
+            success: function (data) {
+                alert('Save call return: ' + data);
+
+//                refresh();
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert('Impossible de sauvegarder le livre.');
+            }
         });
+
+
+
+//        $.post('/resource/book/add', {title: title, collection: collection, shelf: shelf, authorId: authorId}, function (data) {
+//            console.log(data);
+//
+//            alert('Save call return');
+////                    var user = JSON.stringify(data);
+////                    $.cookie(COOKIE_NAME, user, COOKIE_OPTIONS);
+////                    configureLoginButton(data);
+//            refresh();
+//        });
     });
 
 }
