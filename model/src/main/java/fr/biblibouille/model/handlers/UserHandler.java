@@ -72,7 +72,6 @@ public class UserHandler {
 
         try {
             user = (User) query.getSingleResult();
-            user.getBooks().size();
         }
         finally {
             entityManager.close();
