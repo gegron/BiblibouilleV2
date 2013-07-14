@@ -67,6 +67,11 @@
             <artifactId>h2</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
