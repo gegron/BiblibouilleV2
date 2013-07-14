@@ -6,10 +6,7 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-    <!--<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-    <!--xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">-->
-
-    <display-name>MySQL DataSource Example</display-name>
+    <display-name>MySQL DataSource</display-name>
 
     <resource-ref>
         <description>MySQL Datasource example</description>
@@ -17,6 +14,15 @@
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
+    <filter>
+        <filter-name>SecurityFilter</filter-name>
+        <filter-class>fr.legunda.biblibouille.server.security.SecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SecurityFilter</filter-name>
+        <url-pattern>/resource/*</url-pattern>
+    </filter-mapping>
 
     <listener>
         <listener-class>fr.legunda.biblibouille.server.listener.BiblibouilleContextListener</listener-class>
