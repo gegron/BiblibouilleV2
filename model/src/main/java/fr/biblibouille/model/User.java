@@ -4,6 +4,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +23,7 @@ import java.util.Set;
  */
 @JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer"})
 @Entity
-public class User implements Principal {
+public class User implements Principal, Serializable {
 
     private Long id;
 
