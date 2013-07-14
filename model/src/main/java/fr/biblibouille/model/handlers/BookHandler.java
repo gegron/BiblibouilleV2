@@ -1,12 +1,12 @@
 package fr.biblibouille.model.handlers;
 
 import com.google.inject.Inject;
-import fr.biblibouille.model.Author;
 import fr.biblibouille.model.Book;
 import fr.biblibouille.model.User;
 
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -29,7 +29,8 @@ public class BookHandler {
             entityManager.persist(book);
 
             entityManager.getTransaction().commit();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LOGGER.severe(String.format("Save error : %s", e.getCause()));
 
             entityManager.getTransaction().rollback();
@@ -43,11 +44,15 @@ public class BookHandler {
         return book;
     }
 
-    public List<Book> findAll() {
+    public List<Book> findAll(User user) {
         EntityManager entityManager = entityManagerProvider.get();
 
         try {
-            return entityManager.createQuery("from " + Book.class.getName()).getResultList();
+            TypedQuery<Book> query = entityManager.createQuery("from " + Book.class.getName() + " b where b.owner=:user", Book.class);
+
+            query.setParameter("user", user);
+
+            return query.getResultList();
         }
         finally {
             entityManager.close();

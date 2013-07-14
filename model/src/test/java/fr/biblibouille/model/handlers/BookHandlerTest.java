@@ -1,12 +1,9 @@
 package fr.biblibouille.model.handlers;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import fr.biblibouille.model.Author;
 import fr.biblibouille.model.Book;
 import fr.biblibouille.model.User;
-import fr.biblibouille.model.module.PersistenceModule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,12 +54,12 @@ public class BookHandlerTest extends AbstractIntegrationTest{
 
     @After
     public void tearDown() throws Exception {
-
         EntityManager em = entityManagerProvider.get();
 
         em.getTransaction().begin();
         em.createQuery("delete from " + Book.class.getName()).executeUpdate();
         em.createQuery("delete from " + Author.class.getName()).executeUpdate();
+
         em.getTransaction().commit();
     }
 
@@ -94,7 +91,7 @@ public class BookHandlerTest extends AbstractIntegrationTest{
         // Given
 
         // When
-        List<Book> result = bookHandler.findAll();
+        List<Book> result = bookHandler.findAll(userHandler.findByEmail("gerome.egron@gmail.com"));
 
         // Then
         assertThat(result).isNotNull();
