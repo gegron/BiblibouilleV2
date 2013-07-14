@@ -1,12 +1,11 @@
 package fr.biblibouille.model;
 
-import com.google.common.collect.Lists;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.security.Principal;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,9 +20,9 @@ import java.util.Set;
  *
  * @author Legunda
  */
-@JsonIgnoreProperties(value = { "handler", "hibernateLazyInitializer"})
+@JsonIgnoreProperties(value = {"handler", "hibernateLazyInitializer"})
 @Entity
-public class User {
+public class User implements Principal {
 
     private Long id;
 
@@ -83,8 +82,14 @@ public class User {
         return email;
     }
 
+    @Transient
+    @Override
+    public String getName() {
+        return getEmail();
+    }
+
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE },
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "owner")
     public Set<Book> getBooks() {
         return books;
