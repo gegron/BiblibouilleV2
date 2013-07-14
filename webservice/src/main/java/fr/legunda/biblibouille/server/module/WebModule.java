@@ -7,6 +7,7 @@ import fr.biblibouille.model.module.PersistenceModule;
 import fr.legunda.biblibouille.server.resources.AuthorResource;
 import fr.legunda.biblibouille.server.resources.BookResource;
 import fr.legunda.biblibouille.server.resources.HelloWorldRessource;
+import fr.legunda.biblibouille.server.resources.SecurityResource;
 
 public class WebModule extends JerseyServletModule {
 
@@ -17,6 +18,7 @@ public class WebModule extends JerseyServletModule {
         bind(AuthorResource.class).in(Scopes.SINGLETON);
         bind(BookResource.class).in(Scopes.SINGLETON);
         bind(HelloWorldRessource.class).in(Scopes.SINGLETON);
+        bind(SecurityResource.class).in(Scopes.SINGLETON);
 
         serve("/resource/*").with(GuiceContainer.class);
     }
