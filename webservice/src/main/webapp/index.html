@@ -8,8 +8,8 @@
     <meta name="author" content="">
 
     <!-- Les styles -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/select2/select2.css" rel="stylesheet">
     <link href="css/global.css" rel="stylesheet">
 
@@ -44,19 +44,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="./index.html">Bootstrap</a>
+            <a class="brand" href="index.html">Bootstrap</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="active">
-                        <a href="./index.html">Home</a>
+                        <a href="index.html">Home</a>
                     </li>
                 </ul>
             </div>
-            <!--<form class="navbar-form pull-right">-->
-                <!--<input class="span2" type="text" placeholder="Email">-->
-                <!--<input class="span2" type="password" placeholder="Password">-->
-                <!--<button type="submit" class="btn">Sign in</button>-->
-            <!--</form>-->
+            <form class="navbar-form pull-right" action="/resource/security/login" method="post">
+                <input name="email" class="span2" type="text" placeholder="Email">
+                <input name="password" class="span2" type="password" placeholder="Password">
+                <button type="submit" class="btn">Sign in</button>
+            </form>
+            <form class="navbar-form pull-right" action="/resource/security/logout">
+                <input type="submit" class="btn btn-primary" value="Logout"/>
+            </form>
         </div>
     </div>
 </div>
@@ -125,7 +128,7 @@
                             <td name="collection">{{collection}}</td>
                             <td name="shelf">{{shelf}}</td>
                             <td>
-                                <span style='cursor: pointer'><img id='bookEditableButton{{id}}' title='editer' alt='editer' src='./img/icon_edit.png' onclick='makeBookEditable({{id}})' /></span>
+                                <span style='cursor: pointer'><img id='bookEditableButton{{id}}' title='editer' alt='editer' src='img/icon_edit.png' onclick='makeBookEditable({{id}})' /></span>
                             </td>
                         </tr>
                     </script>
@@ -140,8 +143,8 @@
                                 <td><input id="collection{{id}}" name="collection{{id}}" value="{{collection}}" /></td>
                                 <td><input style='width: 50px' id="shelf{{id}}" name="shelf{{id}}" value="{{shelf}}" /></td>
                                 <td>
-                                    <span style='cursor: pointer'><img title='sauvegarder' alt='sauvegarder' src='./img/icon_save.png' onclick='saveModifiedBook({{id}})' /></span>
-                                    <span style='cursor: pointer'><img title='annuler' alt='annuler' src='./img/icon_cancel.png' onclick='stopBookEdition({{id}})' /></span>
+                                    <span style='cursor: pointer'><img title='sauvegarder' alt='sauvegarder' src='img/icon_save.png' onclick='saveModifiedBook({{id}})' /></span>
+                                    <span style='cursor: pointer'><img title='annuler' alt='annuler' src='img/icon_cancel.png' onclick='stopBookEdition({{id}})' /></span>
                                 </td>
                             </tr>
                     </script>
@@ -169,11 +172,11 @@
 <!--                JAVASCRIPT                  -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- ========================================== -->
-<script src="./js/jquery.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/select2.min.js"></script>
-<script src="./js/mustache.js"></script>
-<script src="./js/index.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/mustache.js"></script>
+<script src="js/index.js"></script>
 
 </body>
 </html>
